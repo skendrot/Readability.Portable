@@ -19,7 +19,7 @@ namespace Readability
         private readonly string _consumerKey;
         private readonly string _consumerSecret;
 
-        public ReadabilityClient()
+        private ReadabilityClient()
         {
             OAuthUtility.ComputeHash = (key, buffer) =>
             {
@@ -36,7 +36,7 @@ namespace Readability
             };
         }
 
-        public ReadabilityClient(string consumerKey, string consumerSecret, string oauthToken = null, string oauthSecret = null)
+        public ReadabilityClient(string consumerKey, string consumerSecret, string oauthToken = null, string oauthSecret = null) : this()
         {
             _consumerKey = consumerKey;
             _consumerSecret = consumerSecret;
