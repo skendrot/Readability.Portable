@@ -23,7 +23,7 @@ namespace Readability.Models
         public int WordCount { get; set; }
 
         [JsonProperty("date_published")]
-        public DateTime DatePublished { get; set; }
+        public DateTime? DatePublished { get; set; }
         public object Dek { get; set; }
         public bool Processed { get; set; }
         public string Id { get; set; }
@@ -47,7 +47,7 @@ namespace Readability.Models
         public int Id { get; set; }
 
         [JsonProperty("date_archived")]
-        public DateTime DateArchived { get; set; }
+        public DateTime? DateArchived { get; set; }
 
         // Deprecated
         //[JsonProperty("date_opened")]
@@ -60,7 +60,7 @@ namespace Readability.Models
         public string ArticleUrl { get; set; }
 
         [JsonProperty("date_favorited")]
-        public DateTime DateFavorited { get; set; }
+        public DateTime? DateFavorited { get; set; }
         
         public bool Archive { get; set; }
 
