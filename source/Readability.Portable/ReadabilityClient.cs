@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Readability.Models;
 
 
 namespace Readability
 {
-    public class ReadabilityClient
+    public partial class ReadabilityClient
     {
         private const string BaseUrl = "https://www.readability.com/api/rest/v1/";
         private const string AuthUrl = BaseUrl + "oauth";
-        private const string BookmarkUrl = BaseUrl + "bookmarks";
         private const string ProfileUrl = BaseUrl + "users/_current";
 
         private readonly string _consumerKey;
@@ -99,26 +99,6 @@ namespace Readability
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<UserProfile>(json);
             }
             return null;
-        }
-
-        public async Task<bool> AddBookmarkAsync(string url, bool favorite = false, bool archive = false)
-        {
-            var contentParams = new Dictionary<string, string>();
-            contentParams.Add("url", url);
-            if (favorite)
-            {
-                contentParams.Add("favorite", "1");
-            }
-            if (archive)
-            {
-                contentParams.Add("archive", "1");
-            }
-
-            var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
-            var content = new FormUrlEncodedContent(contentParams);
-            var httpResponseMessage = await client.PostAsync(BookmarkUrl, content).ConfigureAwait(false);
-
-            return httpResponseMessage.IsSuccessStatusCode;
         }
     }
 }

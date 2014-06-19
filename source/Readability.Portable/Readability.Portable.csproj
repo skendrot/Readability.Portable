@@ -32,11 +32,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Readability.Portable.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadabilityClient.cs" />
-    <Compile Include="UserProfile.cs" />
+    <Compile Include="Models\UserProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AsyncOAuth">
@@ -66,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="ServiceMethods\Readability.Client.Bookmarks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
