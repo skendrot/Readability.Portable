@@ -7,28 +7,6 @@ using Newtonsoft.Json;
 
 namespace Readability.Models
 {
-    public class Article
-    {
-        public string Domain { get; set; }
-        public string Title { get; set; }
-        public string Url { get; set; }
-
-        [JsonProperty("lead_image_url")]
-        public string LeadImageUrl { get; set; }
-        public string Author { get; set; }
-        public string Excerpt { get; set; }
-        public string Direction { get; set; }
-
-        [JsonProperty("word_count")]
-        public int WordCount { get; set; }
-
-        [JsonProperty("date_published")]
-        public DateTime? DatePublished { get; set; }
-        public object Dek { get; set; }
-        public bool Processed { get; set; }
-        public string Id { get; set; }
-    }
-
     public class Bookmark
     {
         [JsonProperty("user_id")]
