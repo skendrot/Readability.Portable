@@ -49,7 +49,7 @@ namespace Readability
 
         public AccessToken AccessToken { get; set; }
 
-        public async Task<string> GetRequestToken(string callbackUri, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<string> GetRequestTokenAsync(string callbackUri, CancellationToken cancellationToken = default(CancellationToken))
         {
             //
             // Acquiring a request token
@@ -75,7 +75,7 @@ namespace Readability
             return authUri;
         }
 
-        public async Task<AccessToken> VerifyUser(string verifier)
+        public async Task<AccessToken> VerifyUserAsync(string verifier)
         {
             if (AccessToken == null) throw new Exception();
             if (string.IsNullOrEmpty(AccessToken.Key)) throw new Exception();
@@ -89,7 +89,7 @@ namespace Readability
             return AccessToken;
         }
 
-        public async Task<UserProfile> GetProfile()
+        public async Task<UserProfile> GetProfileAsync()
         {
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             HttpResponseMessage response = await client.GetAsync(ProfileUrl).ConfigureAwait(false);
@@ -101,7 +101,7 @@ namespace Readability
             return null;
         }
 
-        public async Task<bool> AddBookmark(string url, bool favorite = false, bool archive = false)
+        public async Task<bool> AddBookmarkAsync(string url, bool favorite = false, bool archive = false)
         {
             var contentParams = new Dictionary<string, string>();
             contentParams.Add("url", url);
