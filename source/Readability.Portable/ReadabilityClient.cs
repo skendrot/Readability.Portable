@@ -60,7 +60,7 @@ namespace Readability
             var parameters = new Dictionary<string, string> { { "oauth_callback", callbackUri } };
 
             var authorizer = new OAuthAuthorizer(_consumerKey, _consumerSecret);
-            TokenResponse<RequestToken> tokenResponse = await authorizer.GetRequestToken(authUrl, parameters);
+            TokenResponse<RequestToken> tokenResponse = await authorizer.GetRequestToken(authUrl, parameters).ConfigureAwait(false);
             AccessToken = new AccessToken(tokenResponse.Token.Key, tokenResponse.Token.Secret);
             return tokenResponse.Token.Key;
         }
@@ -84,7 +84,7 @@ namespace Readability
             const string accessUrl = AuthUrl + "/access_token/";
 
             OAuthAuthorizer authorizer = new OAuthAuthorizer(_consumerKey, _consumerSecret);
-            TokenResponse<AccessToken> response = await authorizer.GetAccessToken(accessUrl, new RequestToken(AccessToken.Key, AccessToken.Secret), verifier);
+            TokenResponse<AccessToken> response = await authorizer.GetAccessToken(accessUrl, new RequestToken(AccessToken.Key, AccessToken.Secret), verifier).ConfigureAwait(false);
             AccessToken = response.Token;
             return AccessToken;
         }
@@ -92,10 +92,10 @@ namespace Readability
         public async Task<UserProfile> GetProfile()
         {
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
-            HttpResponseMessage response = await client.GetAsync(ProfileUrl);
+            HttpResponseMessage response = await client.GetAsync(ProfileUrl).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
             {
-                string json = await response.Content.ReadAsStringAsync();
+                string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<UserProfile>(json);
             }
             return null;
@@ -116,7 +116,7 @@ namespace Readability
 
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             var content = new FormUrlEncodedContent(contentParams);
-            var httpResponseMessage = await client.PostAsync(BookmarkUrl, content);
+            var httpResponseMessage = await client.PostAsync(BookmarkUrl, content).ConfigureAwait(false);
 
             return httpResponseMessage.IsSuccessStatusCode;
         }
