@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,10 +36,17 @@ namespace Readability
             return httpResponseMessage.IsSuccessStatusCode;
         }
 
+        public async Task<bool> DeleteBookmark(int bookmarkId)
+        {
+            string url = string.Format("{0}/{1}", BookmarkUrl, bookmarkId);
+            var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
+            var message = new HttpRequestMessage(HttpMethod.Delete, url);
+            var response = await client.SendAsync(message).ConfigureAwait(false);
+            return response.StatusCode == HttpStatusCode.NoContent;
+        }
 
         public async Task<BookmarksResponse> GetBookmarksAsync(Conditions conditions)
         {
-
             var jsonSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore};
             JObject jObject = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(conditions, jsonSettings), new JsonSerializerSettings { DateParseHandling = DateParseHandling.None});
 
