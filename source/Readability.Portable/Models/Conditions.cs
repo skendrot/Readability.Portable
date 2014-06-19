@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Newtonsoft.Json;
+using Readability.JsonConverters;
 
 namespace Readability.Models
 {
@@ -37,7 +38,8 @@ namespace Readability.Models
         /// 
         /// </summary>
         [JsonProperty("favorite")]
-        public int? Favorite { get; set; }
+        [JsonConverter(typeof(BooleanJsonConverter))]
+        public bool? Favorite { get; set; }
 
         /// <summary>
         /// 
@@ -67,7 +69,8 @@ namespace Readability.Models
         /// 
         /// </summary>
         [JsonProperty("archive")]
-        public int? Archive { get; set; }
+        [JsonConverter(typeof(BooleanJsonConverter))]
+        public bool? Archive { get; set; }
 
         /// <summary>
         /// 
@@ -98,5 +101,12 @@ namespace Readability.Models
         /// </summary>
         [JsonProperty("updated_until")]
         public DateTime? UpdatedUntil { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("only_deleted")]
+        [JsonConverter(typeof(BooleanJsonConverter))]
+        public bool? OnlyDeleted { get; set; }
     }
 }
