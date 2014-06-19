@@ -34,6 +34,15 @@ namespace Readability
             return httpResponseMessage.IsSuccessStatusCode;
         }
 
+
+        public async Task<BookmarksResponse> GetBookmarksAsync(Conditions conditions)
+        {
+            var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
+            var json = await client.GetStringAsync(BookmarkUrl).ConfigureAwait(false);
+
+            return JsonConvert.DeserializeObject<BookmarksResponse>(json);
+        }
+
         public async Task<Bookmark> GetBookmarkAsync(int bookmarkId)
         {
             string url = string.Format("{0}/{1}", BookmarkUrl, bookmarkId);
