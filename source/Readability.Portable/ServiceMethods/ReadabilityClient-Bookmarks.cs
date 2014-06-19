@@ -1,14 +1,12 @@
-﻿using System;
+﻿using AsyncOAuth;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Readability.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using AsyncOAuth;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Readability.Models;
 
 namespace Readability
 {
@@ -36,7 +34,7 @@ namespace Readability
             return httpResponseMessage.IsSuccessStatusCode;
         }
 
-        public async Task<bool> DeleteBookmark(int bookmarkId)
+        public async Task<bool> DeleteBookmarkAsync(int bookmarkId)
         {
             string url = string.Format("{0}/{1}", BookmarkUrl, bookmarkId);
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
@@ -61,7 +59,6 @@ namespace Readability
             var json = await client.GetStringAsync(url).ConfigureAwait(false);
 
             return JsonConvert.DeserializeObject<BookmarksResponse>(json);
-            return null;
         }
 
         public async Task<Bookmark> GetBookmarkAsync(int bookmarkId)
