@@ -10,7 +10,7 @@ namespace Readability
     {
         const string ArticleUrl = BaseUrl + "articles";
 
-        public async Task<Article> GetArticlekAsync(int articleId)
+        public async Task<Article> GetArticleAsync(int articleId)
         {
             string url = string.Format("{0}/{1}", ArticleUrl, articleId);
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
