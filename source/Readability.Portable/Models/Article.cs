@@ -1,8 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace Readability.Models
 {
+    [ImplementPropertyChanged]
     public class Article
     {
         public string Domain { get; set; }

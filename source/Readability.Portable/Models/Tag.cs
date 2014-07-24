@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace Readability.Models
 {
+    [ImplementPropertyChanged]
     public class Tag
     {
         [JsonProperty("text")]

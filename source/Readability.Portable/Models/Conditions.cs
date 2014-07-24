@@ -1,10 +1,12 @@
 ﻿using System;
 
 using Newtonsoft.Json;
+using PropertyChanged;
 using Readability.JsonConverters;
 
 namespace Readability.Models
 {
+    [ImplementPropertyChanged]
     /// <summary>
     /// 
     /// </summary>

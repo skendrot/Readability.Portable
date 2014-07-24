@@ -1,8 +1,9 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace Readability.Models
 {
+    [ImplementPropertyChanged]
     /// <summary>
     /// 
     /// </summary>
