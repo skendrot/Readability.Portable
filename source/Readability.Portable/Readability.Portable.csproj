@@ -35,6 +35,7 @@
     <DocumentationFile>bin\Release\Readability.Portable.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IReadabilityClient.cs" />
     <Compile Include="JsonConverters\BooleanJsonConverter.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Bookmark.cs" />

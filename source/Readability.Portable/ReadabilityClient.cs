@@ -10,7 +10,7 @@ using Readability.Models;
 
 namespace Readability
 {
-    public partial class ReadabilityClient
+    public partial class ReadabilityClient : IReadabilityClient
     {
         private const string BaseUrl = "https://www.readability.com/api/rest/v1/";
         private const string AuthUrl = BaseUrl + "oauth";
