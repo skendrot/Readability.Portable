@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using PropertyChanged;
 
 namespace Readability.Models
 {
+    [ImplementPropertyChanged]
     public class UserProfile
     {
         [JsonProperty("username")]
