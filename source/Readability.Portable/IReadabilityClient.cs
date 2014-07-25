@@ -13,7 +13,7 @@ namespace Readability
         Uri GenerateAuthenticationUri();
         Task<AccessToken> VerifyUserAsync(string verifier);
         Task<UserProfile> GetProfileAsync();
-        Task<Article> GetArticleAsync(int articleId);
+        Task<Article> GetArticleAsync(string articleId);
         Task<bool> AddBookmarkAsync(string url, bool favorite = false, bool archive = false);
         Task<bool> DeleteBookmarkAsync(int bookmarkId);
         Task<BookmarksResponse> GetBookmarksAsync(Conditions conditions);
