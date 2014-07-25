@@ -10,6 +10,9 @@ using Readability.Models;
 
 namespace Readability
 {
+    /// <summary>
+    /// Represents a client for the Readability API.
+    /// </summary>
     public partial class ReadabilityClient : IReadabilityClient
     {
         private const string BaseUrl = "https://www.readability.com/api/rest/v1/";
@@ -36,6 +39,13 @@ namespace Readability
             };
         }
 
+        /// <summary>
+        /// Creates an instance of the ReadabilityClient.
+        /// </summary>
+        /// <param name="consumerKey">The Readability consumer key.</param>
+        /// <param name="consumerSecret">The Readability consumer secret.</param>
+        /// <param name="oauthToken">An oauth token from a previous authentication.</param>
+        /// <param name="oauthSecret">An oauth seret from a previous authentication.</param>
         public ReadabilityClient(string consumerKey, string consumerSecret, string oauthToken = null, string oauthSecret = null) : this()
         {
             _consumerKey = consumerKey;
