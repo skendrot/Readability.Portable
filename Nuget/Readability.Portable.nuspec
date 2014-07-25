@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>Readability.Portable</id>
+        <version>1.0.7-beta</version>
+        <title>Readability.Portable</title>
+        <authors>Shawn Kendrot</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>My package description.</description>
+        <dependencies>
+            <dependency id="AsyncOAuth" version="0.8.4" />
+            <dependency id="Newtonsoft.Json" version="6.0.3" />
+            <dependency id="Microsoft.Net.Http" version="2.2.22" />
+            <dependency id="PCLCrypto" version="0.5.0.14108" />
+            <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\source\Readability.Portable\bin\Release\Readability.Portable.dll" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Readability.Portable.dll" />
+        <file src="..\source\Readability.Portable\bin\Release\Readability.Portable.XML" target="lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Readability.Portable.XML" />
+    </files>
+</package>
