@@ -2,11 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>Readability.Portable</id>
-        <version>1.0.7-beta</version>
-        <title>Readability.Portable</title>
+        <version>1.0.9-beta</version>
+        <title>Readability Portable Class Library</title>
         <authors>Shawn Kendrot</authors>
+        <projectUrl>https://github.com/skendrot/Readability.Portable</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>My package description.</description>
+        <description>Portable class library for the Readability service.</description>
+        <tags>instapaper, readability, pocket, read later</tags>
         <dependencies>
             <dependency id="AsyncOAuth" version="0.8.4" />
             <dependency id="Newtonsoft.Json" version="6.0.3" />
