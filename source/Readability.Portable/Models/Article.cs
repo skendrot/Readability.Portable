@@ -1,8 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PropertyChanged;
 
 namespace Readability.Models
 {
+    [ImplementPropertyChanged]
     public class Article
     {
         public string Domain { get; set; }
@@ -17,6 +19,7 @@ namespace Readability.Models
 
         [JsonProperty("word_count")]
         public int WordCount { get; set; }
+        public string Content { get; set; }
 
         [JsonProperty("date_published")]
         public DateTime? DatePublished { get; set; }

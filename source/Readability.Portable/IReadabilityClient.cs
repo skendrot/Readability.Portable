@@ -51,7 +51,7 @@ namespace Readability
         /// </summary>
         /// <param name="articleId">The id of the article.</param>
         /// <returns>A Task with the Article.</returns>
-        Task<Article> GetArticleAsync(int articleId);
+        Task<Article> GetArticleAsync(string articleId);
 
         /// <summary>
         /// Add a Bookmark for the authenticated user.
