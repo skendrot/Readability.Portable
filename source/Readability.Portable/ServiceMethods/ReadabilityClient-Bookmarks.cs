@@ -45,16 +45,21 @@ namespace Readability
 
         public async Task<BookmarksResponse> GetBookmarksAsync(Conditions conditions)
         {
-            var jsonSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore};
-            JObject jObject = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(conditions, jsonSettings), new JsonSerializerSettings { DateParseHandling = DateParseHandling.None});
-
             string url = BookmarkUrl;
-            string query = string.Join("&", jObject.Select<KeyValuePair<string, JToken>, string>(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
-            if (string.IsNullOrWhiteSpace(query) == false)
+            if (conditions != null)
             {
-                url = string.Format("{0}?{1}", url, query);
-            }
+                var jsonSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore};
+                JObject jObject = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeObject(conditions, jsonSettings),
+                        new JsonSerializerSettings {DateParseHandling = DateParseHandling.None});
 
+                string query = string.Join("&",
+                    jObject.Select<KeyValuePair<string, JToken>, string>(
+                        kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
+                if (string.IsNullOrWhiteSpace(query) == false)
+                {
+                    url = string.Format("{0}?{1}", url, query);
+                }
+            }
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             var json = await client.GetStringAsync(url).ConfigureAwait(false);
 
