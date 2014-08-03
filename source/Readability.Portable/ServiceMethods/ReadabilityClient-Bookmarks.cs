@@ -74,5 +74,59 @@ namespace Readability
 
             return JsonConvert.DeserializeObject<Bookmark>(json);
         }
+
+        public Task<Bookmark> ArchiveBookmark(int bookmarkId)
+        {
+            return UpdateBookmark(bookmarkId, archive: true);
+        }
+
+        public Task<Bookmark> UnarchiveBookmark(int bookmarkId)
+        {
+            return UpdateBookmark(bookmarkId, archive: false);
+        }
+
+        public Task<Bookmark> FavoriteBookmark(int bookmarkId)
+        {
+            return UpdateBookmark(bookmarkId, favorite: true);
+        }
+
+        public Task<Bookmark> UnfavoriteBookmark(int bookmarkId)
+        {
+            return UpdateBookmark(bookmarkId, favorite: false);
+        }
+
+        public Task<Bookmark> UpdateBookmarkReadPercentage(int bookmarkId, float readPercentage)
+        {
+            return UpdateBookmark(bookmarkId, readPercentage: readPercentage);
+        }
+
+        private async Task<Bookmark> UpdateBookmark(int bookmarkId, bool? favorite = null, bool? archive = null, float? readPercentage = null)
+        {
+            IDictionary<string,string> parameters = new Dictionary<string, string>();
+            if (favorite.HasValue)
+            {
+                parameters["favorite"] = favorite.Value.ToString();
+            }
+            if (archive.HasValue)
+            {
+                parameters["archive"] = archive.Value.ToString();
+            }
+            if (readPercentage.HasValue)
+            {
+                parameters["read_percent"] = readPercentage.Value.ToString();
+            }
+
+            string url = string.Format("{0}/{1}", BookmarkUrl, bookmarkId);
+            var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
+            HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(parameters)).ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                return JsonConvert.DeserializeObject<Bookmark>(json);
+            }
+            return null;
+        }
     }
 }
