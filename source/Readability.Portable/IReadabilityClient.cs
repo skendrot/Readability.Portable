@@ -96,34 +96,20 @@ namespace Readability
         Task<Bookmark> GetBookmarkAsync(int bookmarkId);
 
         /// <summary>
-        /// Mark the Bookmark with the given bookmarkId as archived.
-        /// </summary>
-        /// <param name="bookmarkId">The id of the Bookmark.</param>
-        /// <returns></returns>
-        Task<Bookmark> ArchiveBookmark(int bookmarkId);
-
-
-        /// <summary>
         /// Mark the Bookmark with the given bookmarkId as no longer archived.
         /// </summary>
         /// <param name="bookmarkId">The id of the Bookmark.</param>
+        /// <param name="isArchived"></param>
         /// <returns></returns>
-        Task<Bookmark> UnarchiveBookmark(int bookmarkId);
-
-
-        /// <summary>
-        /// Mark the Bookmark with the given bookmarkId as a favorite.
-        /// </summary>
-        /// <param name="bookmarkId">The id of the Bookmark.</param>
-        /// <returns></returns>
-        Task<Bookmark> FavoriteBookmark(int bookmarkId);
+        Task<Bookmark> SetBookmarkArchiveState(int bookmarkId, bool isArchived);
 
         /// <summary>
         /// Mark the Bookmark with the given bookmarkId as no longer a favorite.
         /// </summary>
         /// <param name="bookmarkId">The id of the Bookmark.</param>
+        /// <param name="isFavorite"></param>
         /// <returns></returns>
-        Task<Bookmark> UnfavoriteBookmark(int bookmarkId);
+        Task<Bookmark> SetBookmarkFavoriteState(int bookmarkId, bool isFavorite);
 
         /// <summary>
         /// Update the Bookmark with the given id with the read percentage.
@@ -131,6 +117,6 @@ namespace Readability
         /// <param name="bookmarkId">The id of the Bookmark.</param>
         /// <param name="readPercentage">The percentage the Bookmark has been read.</param>
         /// <returns></returns>
-        Task<Bookmark> UpdateBookmarkReadPercentage(int bookmarkId, float readPercentage);
+        Task<Bookmark> SetBookmarkReadPercentage(int bookmarkId, float readPercentage);
     }
 }
