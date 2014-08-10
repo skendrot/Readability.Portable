@@ -83,17 +83,17 @@ namespace Readability
             return JsonConvert.DeserializeObject<Bookmark>(json);
         }
 
-        public Task<Bookmark> SetBookmarkArchiveState(int bookmarkId, bool isArchived)
+        public Task<Bookmark> SetBookmarkArchiveStateAsync(int bookmarkId, bool isArchived)
         {
             return UpdateBookmark(bookmarkId, archive: isArchived);
         }
 
-        public Task<Bookmark> SetBookmarkFavoriteState(int bookmarkId, bool isFavorite)
+        public Task<Bookmark> SetBookmarkFavoriteStateAsync(int bookmarkId, bool isFavorite)
         {
             return UpdateBookmark(bookmarkId, favorite: isFavorite);
         }
 
-        public Task<Bookmark> SetBookmarkReadPercentage(int bookmarkId, float readPercentage)
+        public Task<Bookmark> SetBookmarkReadPercentageAsync(int bookmarkId, float readPercentage)
         {
             return UpdateBookmark(bookmarkId, readPercentage: readPercentage);
         }
