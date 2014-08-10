@@ -16,6 +16,8 @@ namespace Readability
 
         public async Task<bool> AddBookmarkAsync(string url, bool favorite = false, bool archive = false)
         {
+            ValidateAccessToken();            
+
             var contentParams = new Dictionary<string, string>();
             contentParams.Add("url", url);
             if (favorite)
@@ -36,6 +38,8 @@ namespace Readability
 
         public async Task<bool> DeleteBookmarkAsync(int bookmarkId)
         {
+            ValidateAccessToken();
+            
             string url = string.Format("{0}/{1}", BookmarkUrl, bookmarkId);
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             var message = new HttpRequestMessage(HttpMethod.Delete, url);
@@ -45,6 +49,8 @@ namespace Readability
 
         public async Task<BookmarksResponse> GetBookmarksAsync(Conditions conditions)
         {
+            ValidateAccessToken();
+            
             string url = BookmarkUrl;
             if (conditions != null)
             {
@@ -68,6 +74,8 @@ namespace Readability
 
         public async Task<Bookmark> GetBookmarkAsync(int bookmarkId)
         {
+            ValidateAccessToken();
+            
             string url = string.Format("{0}/{1}", BookmarkUrl, bookmarkId);
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             var json = await client.GetStringAsync(url).ConfigureAwait(false);
@@ -92,7 +100,9 @@ namespace Readability
 
         private async Task<Bookmark> UpdateBookmark(int bookmarkId, bool? favorite = null, bool? archive = null, float? readPercentage = null)
         {
-            IDictionary<string,string> parameters = new Dictionary<string, string>();
+            ValidateAccessToken();
+            
+            IDictionary<string, string> parameters = new Dictionary<string, string>();
             if (favorite.HasValue)
             {
                 parameters["favorite"] = favorite.Value.ToString();

@@ -77,8 +77,8 @@ namespace Readability
 
         public Uri GenerateAuthenticationUri()
         {
-            if (AccessToken == null) throw new Exception();
-            if (string.IsNullOrEmpty(AccessToken.Key)) throw new Exception();
+            if (AccessToken == null) throw new InvalidOperationException("AccessToken must be set before calling this method.");
+            if (string.IsNullOrEmpty(AccessToken.Key)) throw new InvalidOperationException("AccessToken must have a valid key value.");
 
             string readerUrl = AuthUrl + "/authorize?oauth_token=" + AccessToken.Key;
             var authUri = new Uri(readerUrl);
@@ -87,9 +87,7 @@ namespace Readability
 
         public async Task<AccessToken> VerifyUserAsync(string verifier)
         {
-            if (AccessToken == null) throw new Exception();
-            if (string.IsNullOrEmpty(AccessToken.Key)) throw new Exception();
-            if (string.IsNullOrEmpty(AccessToken.Secret)) throw new Exception();
+            ValidateAccessToken();
 
             const string accessUrl = AuthUrl + "/access_token/";
 
@@ -101,6 +99,8 @@ namespace Readability
 
         public async Task<UserProfile> GetProfileAsync()
         {
+            ValidateAccessToken();
+
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             HttpResponseMessage response = await client.GetAsync(ProfileUrl).ConfigureAwait(false);
             if (response.IsSuccessStatusCode)
@@ -109,6 +109,13 @@ namespace Readability
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<UserProfile>(json);
             }
             return null;
+        }
+
+        private void ValidateAccessToken()
+        {
+            if (AccessToken == null) throw new InvalidOperationException("AccessToken must be set before calling this method.");
+            if (string.IsNullOrEmpty(AccessToken.Key)) throw new InvalidOperationException("AccessToken must have a valid key value.");
+            if (string.IsNullOrEmpty(AccessToken.Secret)) throw new InvalidOperationException("AccessToken must have a valid key secret."); ;
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Readability
 
         public async Task<Article> GetArticleAsync(string articleId)
         {
+            ValidateAccessToken();
+            
             string url = string.Format("{0}/{1}", ArticleUrl, articleId);
             var client = new HttpClient(new OAuthMessageHandler(_consumerKey, _consumerSecret, AccessToken));
             var json = await client.GetStringAsync(url).ConfigureAwait(false);
