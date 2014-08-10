@@ -48,6 +48,9 @@ namespace Readability
         /// <param name="oauthSecret">An oauth seret from a previous authentication.</param>
         public ReadabilityClient(string consumerKey, string consumerSecret, string oauthToken = null, string oauthSecret = null) : this()
         {
+            if (string.IsNullOrEmpty(consumerKey)) throw new ArgumentNullException("consumerKey");
+            if (string.IsNullOrEmpty(consumerSecret)) throw new ArgumentNullException("consumerSecret");
+            
             _consumerKey = consumerKey;
             _consumerSecret = consumerSecret;
 
