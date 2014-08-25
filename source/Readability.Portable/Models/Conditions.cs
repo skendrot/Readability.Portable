@@ -12,6 +12,8 @@ namespace Readability.Models
     /// </summary>
     public class Conditions
     {
+        private int? _perPage;
+
         /// <summary>
         /// 
         /// </summary>
@@ -56,10 +58,20 @@ namespace Readability.Models
         public DateTime? FavoritedSince { get; set; }
 
         /// <summary>
-        /// 
+        /// For pagination, how many results to return per page. Default is 20. Max is 50.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">The value must be between 0 and 50.</exception>
         [JsonProperty("per_page")]
-        public int? PerPage { get; set; }
+        public int? PerPage
+        {
+            get { return _perPage; }
+            set
+            {
+                if ((value < 0) || (value > 50)) 
+                    throw new ArgumentOutOfRangeException("Value must be greater than 0, or less than or equal to 50.");
+                _perPage = value;
+            }
+        }
 
         /// <summary>
         /// 
@@ -79,7 +91,7 @@ namespace Readability.Models
         /// </summary>
         [JsonProperty("added_since")]
         public DateTime? AddedSince { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
